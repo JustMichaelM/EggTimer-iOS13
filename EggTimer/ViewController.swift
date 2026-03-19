@@ -10,9 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let softTime: Float = 5
-    let mediumTime: Float = 7
-    let hardTime: Float = 12
+    let eggTimes: [String : Float] = [
+        "Soft": 5.0,
+        "Medium": 7.0,
+        "Hard": 12.0
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +25,15 @@ class ViewController: UIViewController {
         title = sender.currentTitle!
         print(title)
         
-        if title == "Soft" {
-            print(softTime)
-        } else if title == "Medium" {
-            print(mediumTime)
-        } else if title == "Hard" {
-            print(hardTime)
+    switch title {
+        case "Soft":
+        print(eggTimes[title]!)
+    case "Medium":
+        print(eggTimes[title]!)
+    case "Hard":
+        print(eggTimes[title]!)
+    default:
+        print("No title")
         }
     }
     
