@@ -10,11 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var label: UILabel!
+    
     let eggTimes: [String : Float] = [
-        "Soft": 5.0,
+        "Soft": 0.1,
         "Medium": 7.0,
         "Hard": 12.0
     ]
+    
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +26,7 @@ class ViewController: UIViewController {
     }
     @IBAction func eggHardness(_ sender: UIButton) {
         let title: String = sender.currentTitle!
-        
+        timer.invalidate()
         print(title)
         print(eggTimes[title]!)
         startTimer(time: eggTimes[title]!)
@@ -30,13 +34,15 @@ class ViewController: UIViewController {
     
     func startTimer(time: Float) {
         var timeLeft: Int = Int(time * 60)
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             timeLeft -= 1
             print(timeLeft)
             
             if timeLeft <= 0 {
                 timer.invalidate()
                 print("Time's Up!")
+                self.label.text = "Time's Up!"
             }
         }
     }
