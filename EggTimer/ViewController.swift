@@ -21,20 +21,23 @@ class ViewController: UIViewController {
         print("Lubie Placki")
     }
     @IBAction func eggHardness(_ sender: UIButton) {
-        let title: String
-        title = sender.currentTitle!
-        print(title)
+        let title: String = sender.currentTitle!
         
-    switch title {
-        case "Soft":
+        print(title)
         print(eggTimes[title]!)
-    case "Medium":
-        print(eggTimes[title]!)
-    case "Hard":
-        print(eggTimes[title]!)
-    default:
-        print("No title")
-        }
+        startTimer(time: eggTimes[title]!)
     }
     
+    func startTimer(time: Float) {
+        var timeLeft: Int = Int(time * 60)
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            timeLeft -= 1
+            print(timeLeft)
+            
+            if timeLeft <= 0 {
+                timer.invalidate()
+                print("Time's Up!")
+            }
+        }
+    }
 }
