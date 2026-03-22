@@ -11,17 +11,19 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     let eggTimes: [String : Float] = [
-        "Soft": 0.1,
-        "Medium": 7.0,
-        "Hard": 12.0
+        "Soft": 5,
+        "Medium": 7,
+        "Hard": 12
     ]
     
     var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressBar.progress = 0.0
         print("Lubie Placki")
     }
     @IBAction func eggHardness(_ sender: UIButton) {
@@ -33,10 +35,15 @@ class ViewController: UIViewController {
     }
     
     func startTimer(time: Float) {
-        var timeLeft: Int = Int(time * 60)
+        let totalTime: Float = Float(time * 60)
+        var timeLeft: Float = Float(time * 60)
+        progressBar.progress = 0.0
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.progressBar.progress += 1/totalTime
             timeLeft -= 1
+
+            
             print(timeLeft)
             
             if timeLeft <= 0 {
